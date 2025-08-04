@@ -136,4 +136,24 @@ ProCommunity is still in its early stage — a prototype built to demonstrate co
 - REST API integration
 - Hosting on a cloud platform
 
+## ✨ Planned Features
+
+- [ ] Persistent database (SQLite or PostgreSQL)
+- [ ] Profile image uploads
+- [ ] Like, comment, and follow functionality
+- [ ] REST API endpoints
+- [ ] Email verification
+- [ ] Deployment on platforms like Render or Vercel
+
+---
+
+## 📌 Notes
+
+This is a working MVP submitted within the 48-hour timeline.  
+Core features have been implemented and demonstrated with screenshots above.  
+Database integration and hosting are scheduled for future updates.
+
+---
+
+
 Stay tuned! 🎯
