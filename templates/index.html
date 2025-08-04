@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Professional Community{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <!-- Welcome Section -->
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="card-body text-center py-5">
+                <h1 class="display-5 fw-bold text-primary mb-3">
+                    <i class="fas fa-users me-3"></i>Welcome to ProCommunity
+                </h1>
+                <p class="lead text-muted mb-4">Connect with professionals, share your thoughts, and grow your network</p>
+                
+                {% if not session.user_id %}
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus me-2"></i>Join Now
+                    </a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </a>
+                </div>
+                {% else %}
+                <a href="{{ url_for('create_post') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus me-2"></i>Share Your Thoughts
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Posts Feed -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 mb-0">
+                <i class="fas fa-newspaper me-2"></i>Latest Posts
+            </h2>
+            <span class="badge bg-secondary">{{ posts|length }} posts</span>
+        </div>
+
+        {% if posts %}
+            {% for post in posts %}
+            <div class="card mb-4 shadow-sm border-0 post-card">
+                <div class="card-body">
+                    <!-- Post Header -->
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar-circle me-3">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">
+                                <a href="{{ url_for('profile', user_id=post.user_id) }}" 
+                                   class="text-decoration-none fw-semibold">
+                                    {{ post.author_name }}
+                                </a>
+                            </h6>
+                            <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>
+                                {{ post.timestamp.strftime('%B %d, %Y at %I:%M %p') }}
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Post Content -->
+                    <div class="post-content">
+                        <p class="mb-3">{{ post.content }}</p>
+                    </div>
+                    
+                    <!-- Post Actions -->
+                    <div class="post-actions">
+                        <button class="btn btn-sm btn-outline-primary me-2" onclick="likePost({{ post.id }})">
+                            <i class="fas fa-thumbs-up me-1"></i>Like
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary me-2" onclick="commentPost({{ post.id }})">
+                            <i class="fas fa-comment me-1"></i>Comment
+                        </button>
+                        <button class="btn btn-sm btn-outline-info" onclick="sharePost({{ post.id }})">
+                            <i class="fas fa-share me-1"></i>Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="card text-center py-5 border-0 shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No posts yet</h5>
+                    <p class="text-muted mb-4">Be the first to share something with the community!</p>
+                    {% if session.user_id %}
+                    <a href="{{ url_for('create_post') }}" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Create First Post
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('register') }}" class="btn btn-primary">
+                        <i class="fas fa-user-plus me-2"></i>Join to Post
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function likePost(postId) {
+        // Placeholder for like functionality
+        alert('Like functionality coming soon!');
+    }
+    
+    function commentPost(postId) {
+        // Placeholder for comment functionality
+        alert('Comment functionality coming soon!');
+    }
+    
+    function sharePost(postId) {
+        // Placeholder for share functionality
+        alert('Share functionality coming soon!');
+    }
+</script>
+{% endblock %}

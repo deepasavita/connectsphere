@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user.name }} - Profile{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <!-- Profile Header -->
+        <div class="card mb-4 shadow-sm border-0">
+            <div class="card-body p-5">
+                {% if edit_mode %}
+                <!-- Edit Profile Form -->
+                <form method="POST">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="profile-avatar-large">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="name" class="form-label fw-semibold">Full Name</label>
+                                <input type="text" class="form-control" id="name" name="name" 
+                                       value="{{ user.name }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bio" class="form-label fw-semibold">Professional Bio</label>
+                                <textarea class="form-control" id="bio" name="bio" rows="3">{{ user.bio or '' }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Save Changes
+                        </button>
+                        <a href="{{ url_for('profile', user_id=user.id) }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </a>
+                    </div>
+                </form>
+                {% else %}
+                <!-- Profile Display -->
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <div class="profile-avatar-large">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h1 class="h3 fw-bold mb-2">{{ user.name }}</h1>
+                        <p class="text-muted mb-2">
+                            <i class="fas fa-envelope me-2"></i>{{ user.email }}
+                        </p>
+                        {% if user.bio %}
+                        <p class="mb-3">{{ user.bio }}</p>
+                        {% else %}
+                        <p class="text-muted fst-italic mb-3">No bio provided yet.</p>
+                        {% endif %}
+                        
+                        <div class="d-flex gap-3 text-muted">
+                            <span>
+                                <i class="fas fa-calendar-alt me-1"></i>
+                                Member since 2024
+                            </span>
+                            <span>
+                                <i class="fas fa-edit me-1"></i>
+                                {{ posts|length }} posts
+                            </span>
+                        </div>
+                    </div>
+                    
+                    {% if is_own_profile %}
+                    <div class="col-auto">
+                        <a href="{{ url_for('edit_profile') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-edit me-2"></i>Edit Profile
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- User's Posts -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 mb-0">
+                <i class="fas fa-newspaper me-2"></i>
+                {% if is_own_profile %}
+                    Your Posts
+                {% else %}
+                    {{ user.name.split()[0] }}'s Posts
+                {% endif %}
+            </h2>
+            <span class="badge bg-secondary">{{ posts|length }} posts</span>
+        </div>
+
+        {% if posts %}
+            {% for post in posts %}
+            <div class="card mb-4 shadow-sm border-0 post-card">
+                <div class="card-body">
+                    <!-- Post Header -->
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar-circle me-3">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0 fw-semibold">{{ post.author_name }}</h6>
+                            <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>
+                                {{ post.timestamp.strftime('%B %d, %Y at %I:%M %p') }}
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Post Content -->
+                    <div class="post-content">
+                        <p class="mb-3">{{ post.content }}</p>
+                    </div>
+                    
+                    <!-- Post Actions -->
+                    <div class="post-actions">
+                        <button class="btn btn-sm btn-outline-primary me-2" onclick="likePost({{ post.id }})">
+                            <i class="fas fa-thumbs-up me-1"></i>Like
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary me-2" onclick="commentPost({{ post.id }})">
+                            <i class="fas fa-comment me-1"></i>Comment
+                        </button>
+                        <button class="btn btn-sm btn-outline-info" onclick="sharePost({{ post.id }})">
+                            <i class="fas fa-share me-1"></i>Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="card text-center py-5 border-0 shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">
+                        {% if is_own_profile %}
+                            You haven't posted anything yet
+                        {% else %}
+                            {{ user.name.split()[0] }} hasn't posted anything yet
+                        {% endif %}
+                    </h5>
+                    <p class="text-muted mb-4">
+                        {% if is_own_profile %}
+                            Share your thoughts with the community!
+                        {% else %}
+                            Check back later for updates.
+                        {% endif %}
+                    </p>
+                    {% if is_own_profile %}
+                    <a href="{{ url_for('create_post') }}" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Create Your First Post
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function likePost(postId) {
+        // Placeholder for like functionality
+        alert('Like functionality coming soon!');
+    }
+    
+    function commentPost(postId) {
+        // Placeholder for comment functionality
+        alert('Comment functionality coming soon!');
+    }
+    
+    function sharePost(postId) {
+        // Placeholder for share functionality
+        alert('Share functionality coming soon!');
+    }
+</script>
+{% endblock %}

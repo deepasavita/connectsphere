@@ -1,0 +1,314 @@
+/* Custom LinkedIn-like Professional Styling */
+
+:root {
+    --primary-color: #0073b1;
+    --secondary-color: #378fe9;
+    --accent-color: #70b5f9;
+    --dark-color: #2c3e50;
+    --light-color: #f8f9fa;
+    --border-color: #e9ecef;
+    --text-muted: #6c757d;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f2ef;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    margin-right: 0.5rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Cards and Containers */
+.card {
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.post-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Avatar and Profile */
+.avatar-circle {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.profile-avatar-large {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Post Actions */
+.post-actions .btn {
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.post-actions .btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Forms */
+.form-control {
+    border-radius: 0.375rem;
+    border: 2px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 115, 177, 0.25);
+}
+
+.form-label {
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Alert Customization */
+.alert {
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: var(--success-color);
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: var(--danger-color);
+}
+
+.alert-primary {
+    background: linear-gradient(135deg, #cce7ff, #b3d9ff);
+    color: var(--primary-color);
+}
+
+/* Post Content */
+.post-content {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.post-content p {
+    margin-bottom: 1rem;
+}
+
+/* Loading States */
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-avatar-large {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    .post-actions {
+        text-align: center;
+    }
+    
+    .post-actions .btn {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Animation for page loads */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Input Group Styling */
+.input-group .btn {
+    border-color: var(--border-color);
+}
+
+.input-group .form-control:focus + .btn {
+    border-color: var(--primary-color);
+}
+
+/* Badge Styling */
+.badge {
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+}
+
+/* List Styling */
+.list-unstyled li {
+    padding: 0.25rem 0;
+}
+
+/* Text Colors */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Border Utilities */
+.border-primary {
+    border-color: var(--primary-color) !important;
+}
+
+/* Background Utilities */
+.bg-light {
+    background-color: var(--light-color) !important;
+}
+
+/* Professional Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.display-5 {
+    font-weight: 700;
+}
+
+.lead {
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+/* Enhanced Focus States */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 115, 177, 0.25);
+}
+
+/* Dropdown Styling */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--light-color);
+    color: var(--primary-color);
+}
+
+/* Card Header Enhancement */
+.card-header {
+    background: linear-gradient(135deg, var(--light-color), #ffffff);
+    border-bottom: 2px solid var(--border-color);
+    font-weight: 600;
+}
